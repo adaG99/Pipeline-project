@@ -1,0 +1,31 @@
+image: node:14
+
+stages:
+  - install
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - npm install
+
+install_dependencies:
+  stage: install
+  script:
+    - npm install
+
+unit_tests:
+  stage: test
+  script:
+    - npm test
+  only:
+    - branches
+
+functional_tests:
+  stage: test
+  script:
+    - npx cucumber-js
+  only:
+    - branches
